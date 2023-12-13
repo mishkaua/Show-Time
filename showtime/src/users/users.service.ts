@@ -21,8 +21,8 @@ export class UsersService {
     return userData;
   }
 
-  findOne(id: number): Promise<User> {
-    return this.userModel.findById(+id).exec();
+  findById(id: string): Promise<User> {
+    return this.userModel.findById(id).exec();
   }
 
   update(id: number, updateUserDto: UpdateUserDto): Promise<User> {
