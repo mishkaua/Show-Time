@@ -25,12 +25,12 @@ onMounted(async () => {
 
 function updateUser(user) {
   const dataToUpdate = {
-    id: user.id,
-    name: user.username,
+    id: user._id,
+    username: user.username,
     email: user.email,
   };
-  //console.log(dataToUpdate)
-  axios.put(`http://localhost:8000/api/users/${user.id}`, dataToUpdate)
+  //console.log('Data to update: ', dataToUpdate)
+  axios.patch(`http://localhost:3000/users/${user._id}`, dataToUpdate)
     .then(response => {
       console.log(response.data);
       $toast.success('User updated successfully');
@@ -42,10 +42,10 @@ function updateUser(user) {
 }
 
 function deleteUser(user) {
-  axios.delete(`http://localhost:8000/api/users/${user.id}`)
+  axios.delete(`http://localhost:3000/users/${user._id}`)
   .then(response => {
       console.log(response.data);
-      $toast.success('User deleted successfully');
+      $toast.warning('User deleted successfully');
       getUsers();
     })
     .catch(error => {
@@ -56,11 +56,11 @@ function deleteUser(user) {
 
 function addAdmin(user){
   const dataToUpdate = {
-    id: user.id,
+    id: user._id,
     isAdmin: 1
   };
   console.log(dataToUpdate)
-  axios.put(`http://localhost:8000/api/users/${user.id}`, dataToUpdate)
+  axios.patch(`http://localhost:3000/users/${user._id}`, dataToUpdate)
   .then(response => {
       console.log(response.data);
       $toast.success('User assigned as admin')
@@ -75,8 +75,11 @@ function addAdmin(user){
     <div class="row">
         <div class="col-lg-5 m-3 border rounded shadow">
             <h1>Manage Users</h1>
-
-            <div class="input-group m-2" v-for="user in users" :key="user.id">
+            <div class="d-grid d-md-flex justify-content-md-end">
+                <router-link to="/register"  type="button" class="btn btn-primary">
+                    <font-awesome-icon class="mx-2" icon="fa-solid fa-user-plus" />Add a user</router-link>
+                </div>
+            <div class="input-group m-2" v-for="user in users" :key="user._id">
                 <span class="input-group-text">Username and email</span>
                 <input type="text" aria-label="Username" class="form-control" v-on:keyup.enter="updateUser(user)"
                     v-model="user.username">
@@ -88,18 +91,18 @@ function addAdmin(user){
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                        <router-link to="" class="dropdown-item" @click.prevent="addAdmin(user)" v-model="user.id">
+                        <router-link to="" class="dropdown-item" @click.prevent="addAdmin(user)" v-model="user._id">
                             Add as admin
                         </router-link>
                     </li>
                     <li>
                         <hr class="dropdown-divider">
-                        <router-link to="" class="dropdown-item" v-on:click="updateUser(user)" v-model="user.id">
+                        <router-link to="" class="dropdown-item" v-on:click="updateUser(user)" v-model="user._id">
                             Update a user
                         </router-link>
                     </li>
                     <li>
-                        <router-link to="" class="dropdown-item" v-on:click="deleteUser(user)" v-model="user.id">
+                        <router-link to="" class="dropdown-item" v-on:click="deleteUser(user)" v-model="user._id">
                             Delete a user
                         </router-link>
                     </li>
