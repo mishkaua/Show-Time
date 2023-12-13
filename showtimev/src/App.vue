@@ -10,8 +10,8 @@ import BackToTop from './components/BackToTop.vue';
     <div class="container-fluid">
       <div>
       <RouterLink to="/">Home</RouterLink> |
-      <RouterLink to="/register">Register</RouterLink> |
-      <RouterLink to="/login">Login</RouterLink>
+      <RouterLink to="/admin">Admin Panel</RouterLink> |
+      <RouterLink to="/stats">Booking Statistics</RouterLink>
       </div>
 
       <form class="d-flex" role="search">
