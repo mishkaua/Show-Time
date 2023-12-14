@@ -10,7 +10,7 @@ export class BandsService {
   constructor(@InjectModel(Band.name) private bandModel: Model<Band>) {}
 
   async create(createBandDto: CreateBandDto): Promise<Band> {
-    console.log(createBandDto);
+    //console.log(createBandDto);
     const band = await this.bandModel.findOne({ title: createBandDto.title });
     if (band) {
       throw 'The band already exists';

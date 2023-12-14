@@ -20,7 +20,7 @@ import BackToTop from './components/BackToTop.vue';
       </form>
       
       <div>
-        <a href="/login" class="btn btn-primary me-2" type="button">Login</a>
+        <a href="/login" class="btn btn-primary me-2" type="button"><font-awesome-icon class="me-2" icon="fa-solid fa-user" />Login</a>
         <a href="/register" class="btn btn-primary me-2" type="button">Create an account</a>
       </div>
     </div>

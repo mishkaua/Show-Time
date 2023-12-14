@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { ConcertsService } from './concerts.service';
 import { CreateConcertDto } from './dto/create-concert.dto';
 import { UpdateConcertDto } from './dto/update-concert.dto';
+import { ObjectId } from 'mongoose';
 
 @Controller('concerts')
 export class ConcertsController {
@@ -18,17 +19,20 @@ export class ConcertsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.concertsService.findOne(+id);
+  findOne(@Param('id') id: ObjectId) {
+    return this.concertsService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateConcertDto: UpdateConcertDto) {
-    return this.concertsService.update(+id, updateConcertDto);
+  update(
+    @Param('id') id: ObjectId,
+    @Body() updateConcertDto: UpdateConcertDto,
+  ) {
+    return this.concertsService.update(id, updateConcertDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.concertsService.remove(+id);
+  remove(@Param('id') id: ObjectId) {
+    return this.concertsService.remove(id);
   }
 }

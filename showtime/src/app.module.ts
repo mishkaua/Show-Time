@@ -12,7 +12,11 @@ import { Band, bandSchema } from './bands/band.schema';
 import { BandsModule } from './bands/bands.module';
 import { BandsController } from './bands/bands.controller';
 import { BandsService } from './bands/bands.service';
+
 import { ConcertsModule } from './concerts/concerts.module';
+import { Concert, concertSchema } from './concerts/concert.schema';
+import { ConcertsController } from './concerts/concerts.controller';
+import { ConcertsService } from './concerts/concerts.service';
 
 @Module({
   imports: [
@@ -21,11 +25,17 @@ import { ConcertsModule } from './concerts/concerts.module';
     ),
     MongooseModule.forFeature([{ name: User.name, schema: userSchema }]),
     MongooseModule.forFeature([{ name: Band.name, schema: bandSchema }]),
+    MongooseModule.forFeature([{ name: Concert.name, schema: concertSchema }]),
     UsersModule,
     BandsModule,
     ConcertsModule,
   ],
-  controllers: [AppController, UsersController, BandsController],
-  providers: [AppService, UsersService, BandsService],
+  controllers: [
+    AppController,
+    UsersController,
+    BandsController,
+    ConcertsController,
+  ],
+  providers: [AppService, UsersService, BandsService, ConcertsService],
 })
 export class AppModule {}

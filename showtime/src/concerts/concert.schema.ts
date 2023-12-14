@@ -9,13 +9,16 @@ export class Concert {
   date: Date;
 
   @Prop({ required: true })
-  genre: string;
+  genre: [string];
 
-  @Prop()
+  @Prop({ required: true })
   totalTickets: number;
 
   @Prop()
-  remainingTickets: number;
+  availableTickets: number;
+
+  @Prop({ default: 0 })
+  soldTickets: number;
 }
 
 export const concertSchema = SchemaFactory.createForClass(Concert);

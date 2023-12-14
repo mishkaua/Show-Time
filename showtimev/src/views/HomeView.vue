@@ -5,6 +5,7 @@ import { ref, onMounted, getCurrentInstance } from 'vue';
 import axios from "axios"
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
+import ConcertCardView from './ConcertCardView.vue';
 
 const date = ref();
 const $toast = useToast();
@@ -21,8 +22,8 @@ onMounted(async () => {
     function getBands() {
     axios.get('http://localhost:3000/bands')
         .then(response => {
-            bands.value = response.data
-            console.log('Bands:', bands)
+            bands.value = response.data;
+            console.log('Bands:', bands); 
         })
         .catch(error => {
             console.error("Error getting a band list:", error);
@@ -34,8 +35,6 @@ onMounted(async () => {
 </script>
 
 <template>
-
-  <h1>Welcome to Home Page</h1>
   <p> Date: {{ date }}</p>
   
   <div class="row mx-3">
@@ -59,16 +58,7 @@ onMounted(async () => {
   </div>
 </div>
 
-
-    <div class="card col-sm-3 m-3">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-          content.</p>
-        <a href="#" class="btn btn-primary">Book a ticket</a>
-      </div>
-    </div>
+<ConcertCardView />
 
   </div>
 </template>
