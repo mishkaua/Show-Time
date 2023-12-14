@@ -1,13 +1,35 @@
 <script setup>
 import VueDatePicker from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
-import { ref } from 'vue'
+import { ref, onMounted, getCurrentInstance } from 'vue';
+import axios from "axios"
+import { useToast } from 'vue-toast-notification';
+import 'vue-toast-notification/dist/theme-sugar.css';
 
 const date = ref();
+const $toast = useToast();
+let bands = ref([]);
 
 const handleDate = (modelData) => {
   date.value = modelData;
 }
+
+onMounted(async () => {
+    getBands();
+})
+    
+    function getBands() {
+    axios.get('http://localhost:3000/bands')
+        .then(response => {
+            bands.value = response.data
+            console.log('Bands:', bands)
+        })
+        .catch(error => {
+            console.error("Error getting a band list:", error);
+        });
+}
+
+//then add filters function to the buttons
 
 </script>
 
@@ -25,16 +47,14 @@ const handleDate = (modelData) => {
       Genre
     </button>
     <ul class="dropdown-menu">
-      <li><a class="dropdown-item" href="#">Dropdown link</a></li>
-      <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+      <li v-for="band in bands" :key="band._id"><a class="dropdown-item" href="#">{{ band.genre }}</a></li>
     </ul>
   <!--dropdown by band-->
   <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
     Band
   </button>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="#">Dropdown link</a></li>
-    <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+    <li v-for="band in bands" :key="band._id"><a class="dropdown-item" href="#">{{ band.title }}</a></li>
   </ul>
   </div>
 </div>

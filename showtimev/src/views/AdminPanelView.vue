@@ -3,6 +3,7 @@ import { ref, onMounted, getCurrentInstance } from 'vue';
 import axios from "axios"
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
+import Concerts from '../components/Concerts.vue';
 const $toast = useToast();
 
 let users = ref([]);
@@ -73,6 +74,7 @@ function addAdmin(user){
 
 <template>
     <div class="row">
+        
         <div class="col-lg-5 m-3 border rounded shadow">
             <h1>Manage Users</h1>
             <div class="d-grid d-md-flex justify-content-md-end">
@@ -110,8 +112,6 @@ function addAdmin(user){
             </div>
 
         </div>
-        <div class="col-lg-5 m-3 border rounded shadow">
-            <h1>Manage Concerts</h1>
-        </div>
+        <Concerts />
     </div>
 </template>
