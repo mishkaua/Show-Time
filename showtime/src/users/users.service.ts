@@ -24,6 +24,7 @@ export class UsersService {
         username: createUserDto.username,
         email: createUserDto.email,
         password: hash,
+        passwordConfirmation: '',
       };
       console.log(userToCreate);
       return (await this.userModel.create(userToCreate)).save();
@@ -39,13 +40,11 @@ export class UsersService {
   }
 
   findById(id: string): Promise<User> {
-
     return this.userModel.findById(id).exec();
   }
   findByUsername(username: string): Promise<User> {
-    return this.userModel.findOne({ username:username }).exec();
+    return this.userModel.findOne({ username: username }).exec();
   }
-
 
   update(id: ObjectId, updateUserDto: UpdateUserDto): Promise<User> {
     const existingUser = this.userModel.findByIdAndUpdate(id, updateUserDto, {

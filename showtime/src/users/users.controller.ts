@@ -21,8 +21,8 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Public()
-  @Post()
-  async create(@Body() createUserDto: CreateUserDto) {
+  @Post('register')
+  async register(@Body() createUserDto: CreateUserDto) {
     try {
       return this.usersService.create(createUserDto);
     } catch (error) {
@@ -34,14 +34,30 @@ export class UsersController {
     }
   }
 
+  /* @Public()
+  @Post()
+  async create(@Body() createUserDto: CreateUserDto) {
+    try {
+      return this.usersService.create(createUserDto);
+    } catch (error) {
+      console.log(error);
+      throw new BadRequestException({
+        status: HttpStatus.BAD_REQUEST,
+        error: error,
+      });
+    }
+  } */
+
   @Get()
   findAll() {
     return this.usersService.findAll();
   }
 
   @Get(':id')
+
   findOne(@Param('id') id: string) {
     return this.usersService.findById(id);
+
   }
 
   @Patch(':id')
