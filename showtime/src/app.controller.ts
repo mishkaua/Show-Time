@@ -15,7 +15,7 @@ export class AppController {
   @Public()
   @Get()
   helloWorld() {
-    return 'hello world'
+    return 'hello world';
   }
 
   @UseGuards(JwtAuthGuard)
