@@ -13,11 +13,14 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ObjectId } from 'mongoose';
+import { Public } from 'src/decorators';
+
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+  @Public()
   @Post()
   async create(@Body() createUserDto: CreateUserDto) {
     try {
@@ -37,8 +40,10 @@ export class UsersController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: ObjectId) {
-    return this.usersService.findOne(id);
+
+  findOne(@Param('id') id: string) {
+    return this.usersService.findById(id);
+
   }
 
   @Patch(':id')

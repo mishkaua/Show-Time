@@ -38,9 +38,14 @@ export class UsersService {
     return userData;
   }
 
-  findOne(id: ObjectId): Promise<User> {
+  findById(id: string): Promise<User> {
+
     return this.userModel.findById(id).exec();
   }
+  findByUsername(username: string): Promise<User> {
+    return this.userModel.findOne({ username:username }).exec();
+  }
+
 
   update(id: ObjectId, updateUserDto: UpdateUserDto): Promise<User> {
     const existingUser = this.userModel.findByIdAndUpdate(id, updateUserDto, {
