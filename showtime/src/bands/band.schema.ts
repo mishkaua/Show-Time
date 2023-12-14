@@ -2,11 +2,11 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 @Schema()
 export class Band {
-  @Prop({ required: true })
+  @Prop({ unique: true })
   title: string;
 
   @Prop({ required: true })
-  genre: string;
+  genre: [string];
 
   @Prop()
   followers: [string];

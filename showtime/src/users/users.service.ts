@@ -5,7 +5,6 @@ import { Model, ObjectId } from 'mongoose';
 import { User } from './user.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import * as bcrypt from 'bcrypt';
-import { error } from 'console';
 
 @Injectable()
 export class UsersService {
@@ -25,7 +24,7 @@ export class UsersService {
         email: createUserDto.email,
         password: hash,
       };
-      console.log(userToCreate);
+      //console.log(userToCreate);
       return (await this.userModel.create(userToCreate)).save();
     }
   }
