@@ -17,7 +17,11 @@ export class AppController {
   helloWorld() {
     return 'hello world';
   }
-
+  /* @Public()
+  @Get('users')
+  getUsers(@Request() req){
+    return 'req.users';
+  } */
   @UseGuards(JwtAuthGuard)
   @Get('profile')
   getProfile(@Request() req) {

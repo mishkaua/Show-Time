@@ -15,10 +15,24 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { ObjectId } from 'mongoose';
 import { Public } from 'src/decorators';
 
-
+@Public()
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
+
+  /* @Public()
+  @Post('register')
+  async register(@Body() createUserDto: CreateUserDto) {
+    try {
+      return this.usersService.create(createUserDto);
+    } catch (error) {
+      console.log(error);
+      throw new BadRequestException({
+        status: HttpStatus.BAD_REQUEST,
+        error: error,
+      });
+    }
+  } */
 
   @Public()
   @Post()
@@ -33,12 +47,12 @@ export class UsersController {
       });
     }
   }
-
+  @Public()
   @Get()
   findAll() {
     return this.usersService.findAll();
   }
-
+  @Public()
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.usersService.findById(id);
