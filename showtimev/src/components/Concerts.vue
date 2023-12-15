@@ -1,7 +1,10 @@
 <script setup>
 import { ref, onMounted, getCurrentInstance } from 'vue';
 import axios from "axios"
+import { useToast } from 'vue-toast-notification';
+import 'vue-toast-notification/dist/theme-sugar.css';
 let concerts = ref([]);
+const $toast = useToast();
 
 onMounted(async () => {
     getConcerts();
@@ -19,14 +22,36 @@ function getConcerts() {
 }
 
 function deleteConcert(concert) {
-
+    axios.delete(`http://localhost:3000/concerts/${concert._id}`)
+  .then(response => {
+      console.log(response.data);
+      $toast.warning('Concert deleted successfully');
+      getConcerts();
+    })
+    .catch(error => {
+      console.error("Error deleting ${concert._id} a concert:", error);
+    });
 }
 
 function updateConcert(concert) {
-
+    const dataToUpdate = {
+    id: concert._id,
+    band: concert.band,
+    genre: concert.genre,
+    date: concert.date,
+    totalTickets: concert.totalTickets,
+  };
+  //console.log('Data to update: ', dataToUpdate)
+  axios.patch(`http://localhost:3000/concerts/${concert._id}`, dataToUpdate)
+    .then(response => {
+      console.log(response.data);
+      $toast.success('Concert updated successfully');
+      getConcerts();
+    })
+    .catch(error => {
+      console.error("Error updating concert:", error);
+    });
 }
-
-
 </script>
 
 <template>

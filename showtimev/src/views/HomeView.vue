@@ -10,6 +10,18 @@ import ConcertCardView from './ConcertCardView.vue';
 const date = ref();
 const $toast = useToast();
 let bands = ref([]);
+const activeBand = ref(null);
+
+const props = defineProps({
+    activeBand: {
+    type: String,
+    default: ''
+  },
+})
+
+const setActiveBand = (title) => {
+      activeBand.value = title
+    };
 
 const handleDate = (modelData) => {
   date.value = modelData;
@@ -29,12 +41,10 @@ onMounted(async () => {
             console.error("Error getting a band list:", error);
         });
 }
-
-//then add filters function to the buttons
-
 </script>
 
 <template>
+
   <p> Date: {{ date }}</p>
   
   <div class="row mx-3">
@@ -53,12 +63,13 @@ onMounted(async () => {
     Band
   </button>
   <ul class="dropdown-menu">
-    <li v-for="band in bands" :key="band._id"><a class="dropdown-item" href="#">{{ band.title }}</a></li>
+    <li @click="setActiveBand(band.title)" v-for="band in bands" :key="band._id"><a class="dropdown-item" href="#">{{ band.title }}</a></li>
   </ul>
   </div>
 </div>
+Active Band {{ activeBand }}
 
-<ConcertCardView />
+<ConcertCardView :active-band='activeBand'/>
 
   </div>
 </template>

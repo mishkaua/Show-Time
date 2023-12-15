@@ -50,9 +50,8 @@ function deleteUser(user) {
       getUsers();
     })
     .catch(error => {
-      console.error("Error updating user:", error);
+      console.error("Error deleting user:", error);
     });
-
 }
 
 function addAdmin(user){

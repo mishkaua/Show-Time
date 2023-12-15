@@ -1,7 +1,14 @@
 <script setup>
-import { ref, onMounted, getCurrentInstance } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import axios from "axios"
 let concerts = ref([]);
+
+const props = defineProps({
+  activeBand: {
+    type: String,
+    default: ''
+  },
+})
 
 onMounted(async () => {
     getConcerts();
@@ -17,12 +24,20 @@ onMounted(async () => {
             console.error("Error getting a concert list:", error);
         });
 }
+
+//then add filters function to the buttons
+const filteredConcerts = computed(() => {
+  return props.activeBand
+    ? concerts.value.filter((concert) => concert.band === props.activeBand)
+    : concerts.value
+})
 </script>
 
 <template>
+
     <!--List of concerts-->
     <div class="row d-flex justify-content-evenly">
-        <div v-for="concert in concerts" :key="concert._id" class="card col-sm-5 col-lg-3 m-3">
+        <div v-for="concert in filteredConcerts" :key="concert._id" class="card col-sm-5 col-lg-3 m-3">
             <div class="card-body">
                 <h5 class="card-title">{{ concert.band }}</h5>
                 <p class="card-text">{{ concert.date }}</p>
