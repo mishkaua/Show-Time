@@ -16,7 +16,7 @@ import { JwtAuthGuard } from './auth/jwt-auth.guard';
 @Module({
   imports: [
     MongooseModule.forRoot(
-      'mongodb+srv://mm:mm@showtime.yznq02f.mongodb.net/?retryWrites=true&w=majority',
+      'mongodb+srv://mm:mm@cluster.moekb4z.mongodb.net/?retryWrites=true&w=majority',
     ),
 
     AuthModule,
