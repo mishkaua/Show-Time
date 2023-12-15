@@ -20,7 +20,7 @@ import { Public } from 'src/decorators';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Public()
+  /* @Public()
   @Post('register')
   async register(@Body() createUserDto: CreateUserDto) {
     try {
@@ -32,9 +32,9 @@ export class UsersController {
         error: error,
       });
     }
-  }
+  } */
 
-  /* @Public()
+  @Public()
   @Post()
   async create(@Body() createUserDto: CreateUserDto) {
     try {
@@ -46,7 +46,7 @@ export class UsersController {
         error: error,
       });
     }
-  } */
+  }
   @Public()
   @Get()
   findAll() {
@@ -54,10 +54,8 @@ export class UsersController {
   }
   @Public()
   @Get(':id')
-
   findOne(@Param('id') id: string) {
     return this.usersService.findById(id);
-
   }
 
   @Patch(':id')

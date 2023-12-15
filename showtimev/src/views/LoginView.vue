@@ -43,7 +43,9 @@ export default {
         /* localStorage.setItem('account_creation_date_locally_stored', response.data.user.created_at)
         this.name = response.data.user.name */
         /* console.log(response.data) */
-        setAuthToken(token)
+        /* setAuthToken(token) */
+        this.$router.push('/'); /* link to x page */
+        console.log('Logged in successfully');
       } catch (error) {
         console.log('not connected', error)
       }

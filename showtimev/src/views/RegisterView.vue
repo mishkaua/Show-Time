@@ -5,18 +5,18 @@
       <div class="row">
         <div class="col mb-3">
           <label for="username" class="form-label">Username</label>
-          <input type="text" class="form-control" required minlength="4" aria-label="Username" />
+          <input v-model="username" type="text" class="form-control" required minlength="4" aria-label="Username" />
         </div>
         <div class="col mb-3">
-          <label for="username" class="form-label">Email</label>
-          <input type="email" class="form-control" required aria-label="Email" />
+          <label for="email" class="form-label">Email</label>
+          <input v-model="email" type="email" class="form-control" required aria-label="Email" />
         </div>
       </div>
       <div class="mb-3">
         <label for="password" class="form-label">Create your password</label>
-        <input type="password" class="form-control" required minlength="5" id="password" />
+        <input v-model="password" type="password" class="form-control" required minlength="5" id="password" />
       </div>
-      <div class="mb-3">
+      <!-- <div class="mb-3">
         <label for="passwordConfirmation" class="form-label">Confirm Password</label>
         <input
           type="password"
@@ -25,7 +25,7 @@
           minlength="5"
           id="passwordConfirmation"
         />
-      </div>
+      </div> -->
       <button type="submit" class="btn btn-primary">Create an account</button>
     </div>
   </form>
@@ -38,19 +38,20 @@ export default {
     data ()  {
         return {
             formData: {
-                name:'',
+                /* name:'', */
                 username: '',
                 email: '',
                 password: '',
-                passwordConfirmation: '',
+                /* passwordConfirmation: '', */
             }
         };
     },
     methods: {
         async register() {
         try {
-            const response = await axios.post('/users/register', this.formData);
+            const response = await axios.post('http://localhost:3000/users/', {username: this.username, email: this.email, password: this.password, });
             console.log(response.data);
+            this.$router.push('/login');
         } catch (error) {
             console.log(error);
         }
