@@ -17,9 +17,9 @@ export class CreateUserDto {
   @IsNotEmpty()
   readonly password: string;
 
-  @IsString()
+  /* @IsString()
   @MinLength(5)
   @MaxLength(30)
   @IsNotEmpty()
-  readonly passwordConfirmation: string;
+  readonly passwordConfirmation: string; */
 }

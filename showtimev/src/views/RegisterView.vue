@@ -38,6 +38,7 @@ export default {
     data ()  {
         return {
             formData: {
+                name:'',
                 username: '',
                 email: '',
                 password: '',

@@ -1,16 +1,16 @@
 import axios from 'axios'
 
-const instance = axios.create({
+const axiosInstance = axios.create({
   baseURL: 'http://localhost:3000',
   timeout: 5000
 })
 
 export function setAuthToken(token) {
   if (token) {
-    instance.defaults.headers.common['Authorization'] = `Bearer ${token}`
+    axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`
   } else {
-    delete instance.defaults.headers.common['Authorization']
+    delete axiosInstance.defaults.headers.common['Authorization']
   }
 }
 
-export default instance
+export default axiosInstance

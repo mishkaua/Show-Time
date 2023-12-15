@@ -17,7 +17,7 @@
 
 <script>
 import axios from 'axios'
-import setAuthToken from 'axios';
+import axiosInstance from 'axios';
 
 export default {
   data() {
@@ -31,12 +31,18 @@ export default {
       console.log('username:', this.username)
       console.log('paswd:', this.password)
       try {
-        const response = await axios.post('/auth/login', {
+        const response = await axiosInstance.post('http://localhost:3000/auth/login', {
           username: this.username,
           password: this.password
         })
         const token = response.data.token
+        console.log(response.data)
         localStorage.setItem('token', token)
+        /* localStorage.setItem('id_locally_stored', response.data.user.id)
+        localStorage.setItem('name_locally_stored', response.data.user.name) */
+        /* localStorage.setItem('account_creation_date_locally_stored', response.data.user.created_at)
+        this.name = response.data.user.name */
+        /* console.log(response.data) */
         setAuthToken(token)
       } catch (error) {
         console.log('not connected', error)

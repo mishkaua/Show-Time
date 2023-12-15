@@ -15,7 +15,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { ObjectId } from 'mongoose';
 import { Public } from 'src/decorators';
 
-
+@Public()
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
@@ -47,12 +47,12 @@ export class UsersController {
       });
     }
   } */
-
+  @Public()
   @Get()
   findAll() {
     return this.usersService.findAll();
   }
-
+  @Public()
   @Get(':id')
 
   findOne(@Param('id') id: string) {

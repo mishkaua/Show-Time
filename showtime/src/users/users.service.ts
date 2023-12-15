@@ -24,7 +24,7 @@ export class UsersService {
         username: createUserDto.username,
         email: createUserDto.email,
         password: hash,
-        passwordConfirmation: '',
+        /* passwordConfirmation: '', */
       };
       console.log(userToCreate);
       return (await this.userModel.create(userToCreate)).save();
