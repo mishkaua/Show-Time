@@ -49,7 +49,7 @@ export default {
     methods: {
         async register() {
         try {
-            const response = await axios.post('http://localhost:3000/users/', {username: this.username, email: this.email, password: this.password, });
+            const response = await axios.post('http://localhost:3000/users/register', {username: this.username, email: this.email, password: this.password, });
             console.log(response.data);
             this.$router.push('/login');
         } catch (error) {
