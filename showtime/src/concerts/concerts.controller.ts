@@ -3,6 +3,7 @@ import { ConcertsService } from './concerts.service';
 import { CreateConcertDto } from './dto/create-concert.dto';
 import { UpdateConcertDto } from './dto/update-concert.dto';
 import { ObjectId } from 'mongoose';
+import { Public } from 'src/decorators';
 
 @Controller('concerts')
 export class ConcertsController {
@@ -12,12 +13,12 @@ export class ConcertsController {
   create(@Body() createConcertDto: CreateConcertDto) {
     return this.concertsService.create(createConcertDto);
   }
-
+@Public()
   @Get()
   findAll() {
     return this.concertsService.findAll();
   }
-
+  @Public()
   @Get(':id')
   findOne(@Param('id') id: ObjectId) {
     return this.concertsService.findOne(id);

@@ -11,6 +11,7 @@ import { BandsService } from './bands.service';
 import { CreateBandDto } from './dto/create-band.dto';
 import { UpdateBandDto } from './dto/update-band.dto';
 import { ObjectId } from 'mongoose';
+import { Public } from 'src/decorators';
 
 @Controller('bands')
 export class BandsController {
@@ -20,7 +21,7 @@ export class BandsController {
   create(@Body() createBandDto: CreateBandDto) {
     return this.bandsService.create(createBandDto);
   }
-
+@Public()
   @Get()
   findAll() {
     return this.bandsService.findAll();
