@@ -8,7 +8,7 @@ import { Public } from 'src/decorators';
 @Controller('concerts')
 export class ConcertsController {
   constructor(private readonly concertsService: ConcertsService) {}
-
+  @Public()
   @Post()
   create(@Body() createConcertDto: CreateConcertDto) {
     return this.concertsService.create(createConcertDto);
@@ -23,7 +23,7 @@ export class ConcertsController {
   findOne(@Param('id') id: ObjectId) {
     return this.concertsService.findOne(id);
   }
-
+  @Public()
   @Patch(':id')
   update(
     @Param('id') id: ObjectId,
@@ -31,7 +31,7 @@ export class ConcertsController {
   ) {
     return this.concertsService.update(id, updateConcertDto);
   }
-
+  @Public()
   @Delete(':id')
   remove(@Param('id') id: ObjectId) {
     return this.concertsService.remove(id);

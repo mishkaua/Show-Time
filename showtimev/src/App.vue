@@ -31,7 +31,8 @@ import BackToTop from './components/BackToTop.vue';
 export default {
   components: {
     RouterLink, 
-    RouterView
+    RouterView, 
+    BackToTop
   },
 data() {
   return {

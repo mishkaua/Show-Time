@@ -26,17 +26,17 @@ export class BandsController {
   findAll() {
     return this.bandsService.findAll();
   }
-
+  @Public()
   @Get(':id')
   findOne(@Param('id') id: ObjectId) {
     return this.bandsService.findOne(id);
   }
-
+  @Public()
   @Patch(':id')
   update(@Param('id') id: ObjectId, @Body() updateBandDto: UpdateBandDto) {
     return this.bandsService.update(id, updateBandDto);
   }
-
+  @Public()
   @Delete(':id')
   remove(@Param('id') id: ObjectId) {
     return this.bandsService.remove(id);
